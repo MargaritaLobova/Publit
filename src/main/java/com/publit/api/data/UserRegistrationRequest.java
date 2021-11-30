@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 public class UserRegistrationRequest {
     @JsonProperty(value = "user_name")
     private String username;
-    private String password;
     private String email;
+    private String password;
 
 }
