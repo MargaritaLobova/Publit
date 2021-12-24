@@ -6,9 +6,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class UserRegistrationRequest {
-    @JsonProperty(value = "user_name")
-    private String username;
+public class UserAuthenticationRequest {
     private String email;
     private String password;
 }

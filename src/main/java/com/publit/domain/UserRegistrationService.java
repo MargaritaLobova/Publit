@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserRegistrationService {
     public boolean registerUser(User user) {
+        //TODO registration check
         return true;
     }
 }
