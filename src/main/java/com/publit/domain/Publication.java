@@ -6,21 +6,17 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "issue")
-public class Issue {
+@Table(name = "publication")
+public class Publication {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Getter
     @Setter
-    private String issName;
-    @Getter
-    @Setter
-    private String issueNum;
+    private String pubName;
+    public Publication() {}
 
-    public Issue() {}
-    public Issue(String issName) {
-        setIssName(issName);
+    public Publication(String pubName) {
+        setPubName(pubName);
     }
-
 }
