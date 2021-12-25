@@ -1,21 +1,23 @@
 package com.publit.domain;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import javax.persistence.*;
 
 @Entity
+@Data
 @Table(name = "user_info")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Getter @Setter private String username;
-    @Getter @Setter private String email;
-    @Getter @Setter private String password;
-    public User(){
+    private String username;
+    private String email;
+    private String password;
+    private String token;
+
+    public User() {
     }
 
     public User(String username, String email, String password) {
