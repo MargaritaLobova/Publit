@@ -1,8 +1,9 @@
-package com.publit.domain;
+package com.publit.data.model;
 
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -11,11 +12,16 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
+    @Column(unique = true, nullable = false)
     private String username;
+    @Column(unique = true, nullable = false)
     private String email;
+    @Column(nullable = false)
     private String password;
     private String token;
+
+    @OneToMany
+    private List<Publication> publications;
 
     public User() {
     }
