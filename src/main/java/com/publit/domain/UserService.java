@@ -1,6 +1,7 @@
 package com.publit.domain;
 
-import com.publit.repos.UserRepo;
+import com.publit.data.dao.repos.UserRepo;
+import com.publit.data.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,10 +14,13 @@ public class UserService {
 
     @Transactional
     public String registerUser(User user) {
-        //TODO проверить не зарегистрирован ли уже пользователь
-        user.setToken("lialia");//TODO token implementation
-        userRepo.save(user);
-        return user.getToken();
+        if (userRepo.findByEmail(user.getEmail()) != null) {
+            throw new IllegalArgumentException("You are already registered!");
+        } else {
+            user.setToken("lialia");//TODO token implementation
+            userRepo.save(user);
+            return user.getToken();
+        }
     }
 
     @Transactional
@@ -26,7 +30,7 @@ public class UserService {
             throw new IllegalArgumentException("There is no such a user with such an email!");
         } else {
             if (user.getPassword().equals(password)) {
-                user.setToken("lialia1");//TODO token implementation
+                user.setToken("lialiat");//TODO token implementation
                 return user;
             } else {
                 throw new IllegalArgumentException("Not correct password");
