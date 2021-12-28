@@ -20,7 +20,7 @@ public class IssueService {
     private UserRepo userRepo;
 
     @Transactional
-    public void addIssue(String token, String issueName, int publicationId) {
+    public int addIssue(String token, String issueName, int publicationId) {
         if (userRepo.findByToken(token) != publicationRepo.findById(publicationId).getUser()) {
             throw new IllegalArgumentException("Access denied");
         } else {
@@ -28,6 +28,7 @@ public class IssueService {
             Issue issue = new Issue(issueName, publication);
             issueRepo.save(issue);
             publication.getIssues().add(issue);
+            return issue.getId();
         }
     }
 }

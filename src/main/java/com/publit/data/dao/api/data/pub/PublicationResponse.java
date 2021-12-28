@@ -4,5 +4,7 @@ import lombok.Value;
 
 @Value
 public class PublicationResponse {
-    int publicationID;
+    int publicationId;
+    String status;
+    String message;
 }
