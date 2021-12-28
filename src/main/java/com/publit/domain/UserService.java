@@ -17,7 +17,7 @@ public class UserService {
         if (userRepo.findByEmail(user.getEmail()) != null) {
             throw new IllegalArgumentException("You are already registered!");
         } else {
-            user.setToken("lialia");//TODO token implementation
+            user.setToken(String.valueOf(user.getId()));//TODO improve token implementation
             userRepo.save(user);
             return user.getToken();
         }
@@ -30,7 +30,7 @@ public class UserService {
             throw new IllegalArgumentException("There is no such a user with such an email!");
         } else {
             if (user.getPassword().equals(password)) {
-                user.setToken("lialiat");//TODO token implementation
+                user.setToken(String.valueOf(user.getId()));//TODO improve token implementation
                 return user;
             } else {
                 throw new IllegalArgumentException("Not correct password");
