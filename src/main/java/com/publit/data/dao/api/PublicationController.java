@@ -20,7 +20,7 @@ public class PublicationController {
     public PublicationResponse addPublication(@RequestHeader(name = "User") String token,
                                               @RequestBody PublicationRequest request) {
         return new PublicationResponse(
-                publicationService.addPublication(publicationRequestToPubName(request), token));
+                publicationService.addPublication(publicationRequestToPubName(request), token), "OK", "Publication was added successfully");
     }
 
     private String publicationRequestToPubName(PublicationRequest request) {
@@ -31,7 +31,7 @@ public class PublicationController {
     public PublicationResponse renamePublication(@RequestHeader(name = "User") String token,
                                                  @RequestBody PublicationRenameRequest request) {
         return new PublicationResponse(
-                publicationService.renamePublication(request.getNewName(), request.getId(), token));
+                publicationService.renamePublication(request.getNewName(), request.getId(), token), "OK", "Publication was renamed successfully");
     }
     //TODO del-pub
 }
