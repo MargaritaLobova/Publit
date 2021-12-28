@@ -1,7 +1,8 @@
 package com.publit.data.dao.api;
 
-import com.publit.data.dao.api.data.PublicationRequest;
-import com.publit.data.dao.api.data.PublicationResponse;
+import com.publit.data.dao.api.data.pub.PublicationRenameRequest;
+import com.publit.data.dao.api.data.pub.PublicationRequest;
+import com.publit.data.dao.api.data.pub.PublicationResponse;
 import com.publit.domain.PublicationService;
 import com.publit.data.dao.repos.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,12 @@ public class PublicationController {
     private String publicationRequestToPubName(PublicationRequest request) {
         return request.getName();
     }
+
+    @PostMapping("/api/v1/rename-pub")
+    public PublicationResponse renamePublication(@RequestHeader(name = "User") String token,
+                                                 @RequestBody PublicationRenameRequest request) {
+        return new PublicationResponse(
+                publicationService.renamePublication(request.getNewName(), request.getId(), token));
+    }
     //TODO del-pub
-    //TODO rename-pub
 }
