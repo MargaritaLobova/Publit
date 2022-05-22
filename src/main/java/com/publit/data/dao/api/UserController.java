@@ -1,10 +1,9 @@
-package com.publit.api;
+package com.publit.data.dao.api;
 
-import com.publit.api.data.UserAuthorizationRequest;
-import com.publit.api.data.UserAuthorisationResponse;
-import com.publit.api.data.UserRegistrationRequest;
-import com.publit.api.data.UserRegistrationResponse;
-import com.publit.domain.User;
+import com.publit.data.dao.api.data.user.UserAuthorizationRequest;
+import com.publit.data.dao.api.data.user.UserRegistrationRequest;
+import com.publit.data.dao.api.data.user.UserResponse;
+import com.publit.data.model.User;
 import com.publit.domain.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,21 +13,23 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
     @Autowired
     private UserService userService;
+
     @PostMapping("/api/v1/register")
-    public UserRegistrationResponse registerUser(@RequestBody UserRegistrationRequest registerRequest) {
+    public UserResponse registerUser(@RequestBody UserRegistrationRequest registerRequest) {
         User user = registerRequestToUser(registerRequest);
-        return new UserRegistrationResponse(userService.registerUser(user));
+        return new UserResponse(userService.registerUser(user), "OK", "User was registered successfully");
     }
 
     @PostMapping("/api/v1/auth")
-    public UserAuthorisationResponse authoriseUser(@RequestBody UserAuthorizationRequest authenticationRequest) {
+    public UserResponse authoriseUser(@RequestBody UserAuthorizationRequest authenticationRequest) {
         User user = userService.authorizeUser(authenticationRequest.getEmail(), authenticationRequest.getPassword());
-        return new UserAuthorisationResponse(user.getToken());
+        return new UserResponse(user.getToken(), "OK", "User was authorized successfully");
     }
 
     @PostMapping("/api/v1/out")
-    public void logout(@RequestHeader(name = "Authorization") String token) {
+    public UserResponse logout(@RequestHeader(name = "Authorization") String token) {
         userService.logout(token);
+        return new UserResponse(null, "OK", "User was log out successfully");
     }
 
     private User registerRequestToUser(UserRegistrationRequest request) {

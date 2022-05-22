@@ -1,4 +1,4 @@
-package com.publit.api.data;
+package com.publit.data.dao.api.data.user;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

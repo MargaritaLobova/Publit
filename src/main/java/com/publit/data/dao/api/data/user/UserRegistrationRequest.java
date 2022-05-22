@@ -1,4 +1,4 @@
-package com.publit.api.data;
+package com.publit.data.dao.api.data.user;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;

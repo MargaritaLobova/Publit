@@ -1,10 +1,14 @@
 package com.publit.domain;
 
-import com.publit.repos.UserRepo;
+import com.publit.data.dao.repos.UserRepo;
+import com.publit.data.model.User;
+import lombok.ToString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Random;
+import java.util.StringTokenizer;
 
 @Service
 public class UserService {
@@ -13,10 +17,24 @@ public class UserService {
 
     @Transactional
     public String registerUser(User user) {
-        //TODO проверить не зарегистрирован ли уже пользователь
-        user.setToken("lialia");//TODO token implementation
-        userRepo.save(user);
-        return user.getToken();
+        if (userRepo.findByEmail(user.getEmail()) != null) {
+            throw new IllegalArgumentException("You are already registered!");
+        } else {
+            user.setToken(getRandomString());//TODO improve token implementation
+            userRepo.save(user);
+            return user.getToken();
+        }
+    }
+
+    public String getRandomString() {
+        String str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        Random random = new Random();
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < 5; i++) {
+            int number = random.nextInt(50);
+            sb.append(str.charAt(number));
+        }
+        return sb.toString();
     }
 
     @Transactional
@@ -26,7 +44,7 @@ public class UserService {
             throw new IllegalArgumentException("There is no such a user with such an email!");
         } else {
             if (user.getPassword().equals(password)) {
-                user.setToken("lialia1");//TODO token implementation
+                user.setToken(getRandomString());//TODO improve token implementation
                 return user;
             } else {
                 throw new IllegalArgumentException("Not correct password");
