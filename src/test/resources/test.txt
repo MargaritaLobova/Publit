@@ -1,0 +1,2 @@
+This is test file to check S3 uploading.
+Hello AWS S3!
