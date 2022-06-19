@@ -12,13 +12,16 @@ public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     @Column(unique = true, nullable = false)
     private String name;
-    @Column(unique = true)
+
+    @ManyToOne
     private User actor;
-    @Column(unique = false, nullable = true)
+
     private String description;
-    @Column(unique = false, nullable = false)
+
+    @Column(nullable = false)
     @Enumerated(EnumType.ORDINAL)
     private KanbanColumn status;
 

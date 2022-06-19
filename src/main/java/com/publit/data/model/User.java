@@ -1,5 +1,6 @@
 package com.publit.data.model;
 
+import com.publit.data.model.tracker.Task;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -22,6 +23,9 @@ public class User {
 
     @OneToMany
     private List<Publication> publications;
+
+    @OneToMany
+    private List<Task> assignedTasks;
 
     public User() {
     }
