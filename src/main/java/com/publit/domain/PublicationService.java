@@ -1,7 +1,7 @@
 package com.publit.domain;
 
-import com.publit.data.dao.repos.PublicationRepo;
-import com.publit.data.dao.repos.UserRepo;
+import com.publit.data.dao.api.repos.PublicationRepo;
+import com.publit.data.dao.api.repos.UserRepo;
 import com.publit.data.model.Publication;
 import com.publit.data.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,4 +39,5 @@ public class PublicationService {
             return publication.getId();
         }
     }
+    //TODO: delete publication;
 }

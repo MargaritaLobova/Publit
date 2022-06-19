@@ -3,6 +3,7 @@ package com.publit.data.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -17,6 +18,9 @@ public class Issue {
 
     @ManyToOne
     private Publication publication;
+
+    @OneToMany
+    private List<Article> article;
 
     public Issue() {
     }

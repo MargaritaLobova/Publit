@@ -1,8 +1,8 @@
 package com.publit.domain;
 
-import com.publit.data.dao.repos.ArticleRepo;
-import com.publit.data.dao.repos.IssueRepo;
-import com.publit.data.dao.repos.UserRepo;
+import com.publit.data.dao.api.repos.ArticleRepo;
+import com.publit.data.dao.api.repos.IssueRepo;
+import com.publit.data.dao.api.repos.UserRepo;
 import com.publit.data.model.Article;
 import com.publit.data.model.Issue;
 import com.publit.data.model.User;
@@ -31,14 +31,15 @@ public class ArticleService {
             Issue issue = issueRepo.findById(issueId);
             Article article = new Article(articleName, articleContent, user, issue);
             articleRepo.save(article);
-            issue.getArticleList().add(article);
+            issue.getArticle().add(article);
             return 0;
         }
     }
 
     public int renameArticle() {
-        //TODO implement
+        //TODO: rename article;
         return 0;
     }
+    //TODO: delete article;
 }
 

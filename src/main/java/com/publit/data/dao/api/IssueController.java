@@ -22,6 +22,6 @@ public class IssueController {
                 "OK", "Issue was added successfully");
     }
 
-    //TODO delIssue
-    //TODO renameIssue
+    //TODO: delete issue;
+    //TODO: rename issue;
 }

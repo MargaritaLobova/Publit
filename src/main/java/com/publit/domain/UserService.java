@@ -1,14 +1,12 @@
 package com.publit.domain;
 
-import com.publit.data.dao.repos.UserRepo;
+import com.publit.data.dao.api.repos.UserRepo;
 import com.publit.data.model.User;
-import lombok.ToString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.Random;
-import java.util.StringTokenizer;
 
 @Service
 public class UserService {
@@ -56,4 +54,6 @@ public class UserService {
     public void logout(String token) {
         userRepo.findByToken(token).setToken(null);
     }
+
+    //TODO: delete user;
 }
