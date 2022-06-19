@@ -1,4 +1,4 @@
-package com.publit.data.dao.repos;
+package com.publit.data.dao.api.repos;
 
 import com.publit.data.model.Issue;
 import org.springframework.data.repository.CrudRepository;

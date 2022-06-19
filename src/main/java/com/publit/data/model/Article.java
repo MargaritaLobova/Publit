@@ -20,7 +20,6 @@ public class Article {
     @ManyToOne
     private Issue issue;
 
-
     public Article() {
     }
 

@@ -4,7 +4,7 @@ import com.publit.data.dao.api.data.pub.PublicationRenameRequest;
 import com.publit.data.dao.api.data.pub.PublicationRequest;
 import com.publit.data.dao.api.data.pub.PublicationResponse;
 import com.publit.domain.PublicationService;
-import com.publit.data.dao.repos.UserRepo;
+import com.publit.data.dao.api.repos.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,5 +33,5 @@ public class PublicationController {
         return new PublicationResponse(
                 publicationService.renamePublication(request.getNewName(), request.getId(), token), "OK", "Publication was renamed successfully");
     }
-    //TODO del-pub
+    //TODO: delete publication;
 }
