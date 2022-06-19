@@ -32,6 +32,30 @@ public class BoardService {
             return board.getId();
         }
     }
-    //TODO:rename board;
-    //TODO:delete board;
+
+    @Transactional
+    public int deleteBoard(String token, int boardId, int issueId) {
+        User user = userRepo.findByToken(token);
+        if (user == issueRepo.findById(issueId).getPublication().getUser()) {
+            throw new IllegalArgumentException("Access denied");
+        } else {
+            Board board = boardRepo.findById(boardId);
+            boardRepo.deleteById(boardId);
+            return 0;
+        }
+    }
+
+    //TODO: add board to issue;
+    @Transactional
+    public int renameBoard(String token, int boardId, int issueId, String newName) {
+        User user = userRepo.findByToken(token);
+        if (user == issueRepo.findById(issueId).getPublication().getUser()) {
+            throw new IllegalArgumentException("Access denied");
+        } else {
+            Board board = boardRepo.findById(boardId);
+            board.setName(newName);
+            boardRepo.save(board);
+            return board.getId();
+        }
+    }
 }

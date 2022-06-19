@@ -5,6 +5,7 @@ import com.publit.data.dao.api.repos.IssueRepo;
 import com.publit.data.dao.api.repos.UserRepo;
 import com.publit.data.model.Article;
 import com.publit.data.model.Issue;
+import com.publit.data.model.Publication;
 import com.publit.data.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,14 +33,38 @@ public class ArticleService {
             Article article = new Article(articleName, articleContent, user, issue);
             articleRepo.save(article);
             issue.getArticle().add(article);
-            return 0;
+            return article.getId();
         }
     }
 
-    public int renameArticle() {
-        //TODO: rename article;
-        return 0;
+    @Transactional
+    public int renameArticle(int articleId, int issueId, String token, String newTitle) {
+        Article article = articleRepo.findById(articleId);
+        User user = userRepo.findByToken(token);
+        if (user != article.getAuthor()) {
+            throw new IllegalArgumentException("Access denied");
+        } else {
+            Issue issue = issueRepo.findById(issueId);
+            issue.getArticle().remove(article);
+            article.setTitle(newTitle);
+            articleRepo.save(article);
+            issue.getArticle().add(article);
+            return article.getId();
+        }
     }
-    //TODO: delete article;
+
+    @Transactional
+    public int deleteArticle(int articleId, int issueId, String token, String newTitle) {
+        Article article = articleRepo.findById(articleId);
+        User user = userRepo.findByToken(token);
+        if (user == issueRepo.findById(issueId).getPublication().getUser()) {
+            throw new IllegalArgumentException("Access denied");
+        } else {
+            Issue issue = issueRepo.findById(issueId);
+            issue.getArticle().remove(article);
+            articleRepo.deleteById(articleId);
+            return 0;
+        }
+    }
 }
 
