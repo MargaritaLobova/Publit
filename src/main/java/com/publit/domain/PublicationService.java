@@ -39,5 +39,17 @@ public class PublicationService {
             return publication.getId();
         }
     }
-    //TODO: delete publication;
+
+    @Transactional
+    public int deletePublication(int id, String token) {
+        Publication publication = publicationRepo.findById(id);
+        User user = userRepo.findByToken(token);
+        if (user != publication.getUser()) {
+            throw new IllegalArgumentException("Access denied");
+        } else {
+            user.getPublications().remove(publication);
+            publicationRepo.deleteById(id);
+            return 0;
+        }
+    }
 }

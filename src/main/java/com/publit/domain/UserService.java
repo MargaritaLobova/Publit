@@ -55,5 +55,12 @@ public class UserService {
         userRepo.findByToken(token).setToken(null);
     }
 
-    //TODO: delete user;
+    @Transactional
+    public void deleteUser(User user) {
+        if (userRepo.findByEmail(user.getEmail()) != null) {
+            throw new IllegalArgumentException("You are already registered!");
+        } else {
+            userRepo.deleteById(user.getId());
+        }
+    }
 }
