@@ -31,6 +31,6 @@ public class IssueService {
             return issue.getId();
         }
         //TODO: rename issue;
-        //TODO:delete issue;
+        //TODO: delete issue;
     }
 }

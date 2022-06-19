@@ -19,6 +19,7 @@ public class Task {
     @Column(unique = false, nullable = true)
     private String description;
     @Column(unique = false, nullable = false)
+    @Enumerated(EnumType.ORDINAL)
     private KanbanColumn status;
 
     @ManyToOne
