@@ -10,13 +10,16 @@ public class Article {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     @Column(nullable = false)
     private String title;
+
     @Column(unique = true, nullable = false)
     private String content;
 
     @ManyToOne
     private User author;
+
     @ManyToOne
     private Issue issue;
 
